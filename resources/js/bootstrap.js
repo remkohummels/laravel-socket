@@ -44,6 +44,17 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
+import Echo from "laravel-echo"
+window.io = require('socket.io-client');
+
+// Have this in case you stop running your laravel echo server
+if (typeof io !== 'undefined') {
+    window.Echo = new Echo({
+        broadcaster: 'socket.io',
+        host: window.location.hostname + ':6001',
+    });
+}
+
 // import Echo from 'laravel-echo'
 
 // window.Pusher = require('pusher-js');

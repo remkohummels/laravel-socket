@@ -14,3 +14,7 @@ yarn-error.log
 composer.lock
 package-lock.json
 laravel-echo-server.lock
+
+/public/css
+/public/js
+/public/mix-manifest.json
