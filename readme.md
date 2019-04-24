@@ -40,7 +40,6 @@ $ sudo apt install php7.2 libapache2-mod-php7.2 php7.2-curl php7.2-mbstring php7
 ```redis
 $ sudo apt-get install redis-server
 $ sudo systemctl enable redis-server.service
-$ sudo systemctl enable redis-server.service
 ```
 
 - Open the redis config file: `$ sudo nano /etc/redis/redis.conf`
@@ -82,7 +81,7 @@ In the /laravel-socket folder,
 8). Install the "laravel-echo-server" and initialize its configuration.
 
 ```echo
-$ npm install -g laravel-echo-server
+$ sudo npm install -g laravel-echo-server
 $ laravel-echo-server init
 $ laravel-echo-server client:add
 
@@ -97,7 +96,7 @@ To discard the cron output we put `/dev/null 2>&1` at the end of the cronjob exp
 
 1). Run `$ sudo apt-get install supervisor` to install supervisor.
 
-2). Open `$ sudo nano /etc/supervisor/conf.d/laravel-worker.conf` to create a config file in /etc/supervisor/conf.d directory.
+2). Open `$ sudo nano /etc/supervisor/conf.d/laravel-horizon.conf` to create a config file in /etc/supervisor/conf.d directory.
 
 3). Copy the followings in the `laravel-horizon.conf` file and save it.
 
@@ -127,12 +126,12 @@ redirect_stderr=true
 stdout_logfile=/var/www/html/laravel-socket/storage/logs/echo.log
 ```
 
-5). Copy the followings in the `laravel-socket.conf` file and save it.
+5). Copy the followings in the `laravel-worker.conf` file and save it.
 
 ```supervisor
-[program:laravel-socket]
+[program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /var/www/html/laravel-socket/artisan queue:listen --sleep=3 --tries$
+command=php /var/www/html/laravel-socket/artisan queue:listen --sleep=3 --tries=3
 autostart=true
 autorestart=true
 user=dev
