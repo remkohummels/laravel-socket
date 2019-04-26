@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -14,14 +15,16 @@ class MessagePushed implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $userId;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($userId)
     {
-        //
+        $this->userId = $userId;
     }
 
     /**
@@ -31,7 +34,8 @@ class MessagePushed implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('notification');
+//        return new PrivateChannel('notification');
+        return new PrivateChannel('notification.' . $this->userId);
     }
 
     public function broadcastWith()

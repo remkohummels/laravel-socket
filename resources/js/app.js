@@ -32,7 +32,7 @@ require('./bootstrap');
 //     el: '#app'
 // });
 
-window.Echo.private('notification')
+window.Echo.private('notification.' + 1)
     .listen('MessagePushed', (e) => {
         console.log(e);
     });

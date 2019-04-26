@@ -39,6 +39,6 @@ class SendMessage extends Command
     public function handle()
     {
         // Dispatch an event for pushing a new message. (Broadcast to all recipient)
-        event(new MessagePushed());
+        event(new MessagePushed(1));
     }
 }
